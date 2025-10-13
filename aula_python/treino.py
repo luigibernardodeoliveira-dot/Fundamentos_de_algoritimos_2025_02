@@ -194,3 +194,9 @@ elif lados == 10:
     print ("decágono")
 else:
     print ("Erro!")
+
+
+
+#
+for index in range()
+print()
