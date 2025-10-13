@@ -196,7 +196,3 @@ else:
     print ("Erro!")
 
 
-
-#
-for index in range()
-print()
