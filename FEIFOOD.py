@@ -200,6 +200,7 @@ def cadastrar_usuario():
     senha = input("Senha: ")
     data_nasc = input("Data de nascimento (DD/MM/AAAA): ")
 
+
     print("✅ Usuário cadastrado com sucesso!")
     print("Voltando ao menu principal...\n")
 
@@ -210,6 +211,8 @@ def login_usuario():
     senha = input("Senha: ")
 
     print("✅ Login realizado com sucesso!")
+
+
     menu_pedido()  # vai para o menu de pedidos
 
 
@@ -239,7 +242,30 @@ def menu_pedido():
 
 
 def lista_alimentos():
-    print("🍔 Lista de alimentos: Hamburguer, Pizza, Refrigerante, Batata Frita")
+    A = [
+        ["Pizza Calabresa", 35.00],
+        ["Hambúrguer Artesanal", 22.50],
+        ["Sushi Combo", 48.90],
+        ["Lasanha Bolonhesa", 29.00],
+        ["Salada Caesar", 19.50],
+        ["Açaí 500ml", 15.00],
+        ["Refrigerante Lata", 6.50],
+        ["Suco Natural", 9.00],
+        ["Batata Frita", 12.00],
+        ["Coxinha", 5.00],
+        ["Hot Dog", 10.00],
+        ["Torta de Limão", 14.00],
+        ["Sorvete 2 bolas", 10.00],
+        ["Macarrão Carbonara", 27.50],
+        ["Strogonoff de Frango", 28.00]
+    ]
+
+    for linha in range(len(A)):
+        for coluna in range(len(A[linha])):
+            print(A[linha] [coluna], end=" - ")
+        print() #pegei essa parte no slide aula 10 pag 18
+
+
 
 
 def fazer_pedido():
