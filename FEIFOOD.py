@@ -1,12 +1,13 @@
 
 pedidos = []
-
+arquivo = open("feifood.txt", "a")
 def menu_principal(): # Menu principal do sistema FeiFood aqui o usuário pode escolher entre cadastrar, logar ou sair
     while True:
-        print("\n=== SEJA BEM-VINDO AO FEIFOOD ===")
+        print("\n====== SEJA BEM-VINDO AO FEIFOOD ======")
         print("1 - Cadastrar usuário")
         print("2 - Login")
         print("0 - Sair")
+        print("=======================================")
         opcao = input("Escolha: ")
 
         if opcao == "1":
@@ -14,44 +15,66 @@ def menu_principal(): # Menu principal do sistema FeiFood aqui o usuário pode e
         elif opcao == "2":
             login_usuario()
         elif opcao == "0":
-            print("Saindo... Obrigado por usar o FeiFood!")
+            print("===Saindo... Obrigado por usar o FeiFood!===")
             break
         else:
             print("Opção inválida!")
 
 
+
+
+
+
+
 def cadastrar_usuario(): # Função para cadastrar um novo usuário aqui o usuario ira se cadastrar para en seguida poder logar
-    print("\n=== Cadastro de Usuário ===")#devera ser salvo em txt
+    print("\n========== Cadastro de Usuário ==========")#devera ser salvo em txt
     nome = input("Nome: ")
     email = input("Email: ")
     senha = input("Senha: ")
     data_nasc = input("Data de nascimento (DD/MM/AAAA): ")
 
+    print(" Usuário cadastrado com sucesso!")
+    print("Voltando ao menu principal...")
+    print("=================================")
 
-    print("✅ Usuário cadastrado com sucesso!")
-    print("Voltando ao menu principal...\n")
+
+
 
 
 def login_usuario(): # Função para login do usuário aqui o usuario ira logar para poder fazer pedidos
-    print("\n=== Login ===")
+    print("=========== Login ===========")
     email = input("Email: ")
     senha = input("Senha: ")
 
-    print("✅ Login realizado com sucesso!")
+    print("Login realizado com sucesso!")
+    print("=============================")
+
+
+
+
+
+
 
 
     menu_pedido()  # vai para o menu de pedidos
 
 
+
+
+
+
+
+
 def menu_pedido():# Menu de pedidos do FeiFood aqui o usuario podera ver o cardapio, fazer pedidos, ver pedidos, finalizar e avaliar
     while True:# essa parte e um loop para o menu de pedidos
-        print("\n=== CARDÁPIO FEIFOOD ===")
+        print("======= CARDÁPIO FEIFOOD =======")
         print("1 - Listar alimentos")
         print("2 - Fazer pedido")
         print("3 - Ver pedidos")
         print("4 - Finalizar pedido")
         print("5 - Avaliar pedido")
         print("0 - Voltar ao menu principal")
+        print("================================")
         opcao = input("Escolha: ")
 
         if opcao == "1":
@@ -71,8 +94,14 @@ def menu_pedido():# Menu de pedidos do FeiFood aqui o usuario podera ver o carda
             print("Opção inválida!")
 
 
+
+
+
+
+
+
 def lista_alimentos(): # Função que cria e exibe a lista de alimentos com preços
-    print("\n=== LISTA DE ALIMENTOS DISPONÍVEIS ===")
+    print("=== LISTA DE ALIMENTOS DISPONÍVEIS ===")
     A = [
         ["Pizza Calabresa", 35.00],
         ["Hambúrguer Artesanal", 22.50],
@@ -100,7 +129,7 @@ def lista_alimentos(): # Função que cria e exibe a lista de alimentos com pre�
     
 
 def fazer_pedido():  
-    global pedidos    # para acessar a lista dos pedidos
+    pedidos = []   
     A = lista_alimentos()     
 
     while True:  # Inicia um loop para permitir que o usuário faça vários pedidos
@@ -129,9 +158,9 @@ def fazer_pedido():
 
 
 def ver_pedidos():
-    global pedidos 
+    pedidos = []   
 
-    print("\n=== SEUS PEDIDOS ===")
+    print("======== SEUS PEDIDOS ======")
 
     if len(pedidos) == 0:  # Verifica se a lista de pedidos está vazia
         print("Nenhum pedido foi feito ainda.")
@@ -148,13 +177,13 @@ def ver_pedidos():
         print(f"{nome} - {quantidade}x - R$ {total_item:.2f}")
         total_geral += total_item  # Soma o valor ao total geral
 
-    print(f"\nTOTAL DO PEDIDO: R$ {total_geral:.2f}")
-    print("==============================\n")
+    print(f"TOTAL DO PEDIDO: R$ {total_geral:.2f}")
+    print("============================")
 
 
 
 def finalizar_pedido():
-    global pedidos
+    pedidos = []   
     if len(pedidos) == 0:
         print("Nenhum pedido para finalizar.")
         return
