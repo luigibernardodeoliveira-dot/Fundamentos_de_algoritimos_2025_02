@@ -1,2 +1,2 @@
-Luigi Bernardo De Oliveira,luigi@gmail.com,Feifood
-0,0,0
+luigi bernardo,luigi.@gmail.com,123123
+luigi,luigibernardo@gmail.com,456

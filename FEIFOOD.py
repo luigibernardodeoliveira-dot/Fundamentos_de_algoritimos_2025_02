@@ -28,12 +28,13 @@ def cadastrar_usuario(): # Função para cadastrar um novo usuário aqui o usuar
     senha = input("Senha: ")
     senha2 = input("Confirme a senha: ")
 
-    if senha != senha2:
+    if senha != senha2:# Verifica se as senhas coincidem
         print("As senhas não coincidem! Tente novamente.")
         return
+    
 
 
-    arquivo = open("feifood.txt", "r")
+    arquivo = open("feifood.txt", "r")# Abre o arquivo em modo de leitura
     linhas = arquivo.readlines()
     arquivo.close()
 
@@ -45,7 +46,7 @@ def cadastrar_usuario(): # Função para cadastrar um novo usuário aqui o usuar
             return
 
 
-    arquivo = open("feifood.txt", "a")
+    arquivo = open("feifood.txt", "a")# Abre o arquivo em modo de adição
     arquivo.write(f"{nome},{email},{senha}\n")
     arquivo.close()
 
@@ -62,14 +63,14 @@ def login_usuario(): # Função para login do usuário aqui o usuario ira logar 
     email = input("Email: ")
     senha = input("Senha: ")
 
-    arquivo = open("feifood.txt", "r")
+    arquivo = open("feifood.txt", "r")# Abre o arquivo em modo de leitura
     linhas = arquivo.readlines() 
     arquivo.close()                     
 
     for linha in linhas:  # percorre cada linha do arquivo
             nome_salvo, email_salvo, senha_salva = linha.strip().split(",")#
 
-            if email.lower() == email_salvo.lower() and senha == senha_salva:
+            if email.lower() == email_salvo.lower() and senha == senha_salva:# Verifica se o email e senha coincidem
                 print(f"Login bem-sucedido! Bem-vindo, {nome_salvo}!")
 
                 menu_pedido()
@@ -205,14 +206,14 @@ def lista_alimentos():
 def fazer_pedido():# Função para fazer pedidos aqui o usuario podera escolher os itens do cardapio e fazer o pedido
     A = lista_alimentos()
 
-    while True:
+    while True:# Loop para fazer pedidos
         alimento = input("Escolha um item (ou digite 'fim' para encerrar): ")
 
         if alimento.lower() == "fim":
             print("Pedido finalizado!")
             break
 
-        if alimento in A:
+        if alimento in A:# Verifica se o alimento está no cardápio
             quantidade = int(input(f"Quantas unidades de {alimento}? "))
             total_item = quantidade * A[alimento]["preco"]
 
@@ -233,17 +234,17 @@ def fazer_pedido():# Função para fazer pedidos aqui o usuario podera escolher 
 def ver_pedidos():
     print("========== PEDIDOS REALIZADOS ==========")
 
-    arquivo = open("pedidos.txt", "r")
+    arquivo = open("pedidos.txt", "r")# Abre o arquivo em modo de leitura
     linhas = arquivo.readlines()
     arquivo.close()
 
-    if len(linhas) == 0:
+    if len(linhas) == 0: # Verifica se há pedidos
         print("Nenhum pedido realizado ainda.")
     else:
         # Mostra todos os pedidos atuais
         for linha in linhas:
-            alimento, quantidade, total_item = linha.strip().split(",")
-            print(f"{quantidade}x {alimento} - Total: R$ {total_item}")
+            alimento, quantidade, total_item = linha.strip().split(",")# separa os valores 
+            print(f"{quantidade}x {alimento} - Total: R$ {total_item}")# mostra o pedido
 
         print("=======================================")
         print("1 - Adicionar item")
@@ -260,7 +261,7 @@ def ver_pedidos():
                 preco = A[alimento]["preco"]   # pega preço do dicionário
                 total = quantidade * preco
 
-                arquivo = open("pedidos.txt", "a")
+                arquivo = open("pedidos.txt", "a")# Abre o arquivo em modo de adição
                 arquivo.write(f"{alimento},{quantidade},{total:.2f}\n")
                 arquivo.close()
                 print(f"{quantidade}x {alimento} adicionado com sucesso! Total R$ {total:.2f}")
@@ -270,16 +271,16 @@ def ver_pedidos():
         elif opcao == 2:
             alimento = input("Nome do alimento que deseja remover: ")
 
-            for i in range(len(linhas)):
-                nome, quantidade, total_item = linhas[i].strip().split(",")
-                if alimento.lower() == nome.lower():
-                    linhas.pop(i)
+            for i in range(len(linhas)):# Percorre as linhas para encontrar o item
+                nome, quantidade, total_item = linhas[i].strip().split(",")# separa os valores
+                if alimento.lower() == nome.lower():# Verifica se o alimento é o que o usuário quer remover
+                    linhas.pop(i)# Remove a linha do pedido
                     break
             else:
                 print("Esse item não está no pedido.")
                 return
 
-            arquivo = open("pedidos.txt", "w")
+            arquivo = open("pedidos.txt", "w")# Abre o arquivo em modo de escrita
             arquivo.writelines(linhas)
             arquivo.close()
             print(f"{alimento} removido com sucesso!")
@@ -296,30 +297,30 @@ def ver_pedidos():
 
 
 def finalizar_pedido():
-    arquivo = open("pedidos.txt", "r")
+    arquivo = open("pedidos.txt", "r")# Abre o arquivo em modo de leitura
     linhas = arquivo.readlines()
     arquivo.close()
 
-    if len(linhas) == 0:
+    if len(linhas) == 0:# Verifica se há pedidos
         print("Nenhum pedido realizado para finalizar.")
         return
 
-    total_geral = 0
+    total_geral = 0 # Inicializa o total geral do pedido
     print("========== RESUMO DO PEDIDO ==========")
-    for linha in linhas:
-        alimento, quantidade, total_item = linha.strip().split(",")
-        print(f"{quantidade}x {alimento} - Total: R$ {total_item}")
-        total_geral += float(total_item)
+    for linha in linhas:# Percorre as linhas do pedido
+        alimento, quantidade, total_item = linha.strip().split(",")# separa os valores
+        print(f"{quantidade}x {alimento} - Total: R$ {total_item}")# mostra o pedido
+        total_geral += float(total_item)# Soma o total do item ao total geral
 
     print(f"Total Geral do Pedido: R$ {total_geral:.2f}")
     print("=====================================")
 
-    confirmar = input("Deseja confirmar o pedido? (s/n): ")
+    confirmar = input("Deseja confirmar o pedido? (s/n): ") 
     if confirmar.lower() == "s":
 
         print("Pedido confirmado! Obrigado por usar o FeiFood.")
-        arquivo = open("pedidos.txt", "w")
-        arquivo.close()
+        arquivo = open("pedidos.txt", "w")# Abre o arquivo em modo de escrita para limpar os pedidos
+        arquivo.close()# Fecha o arquivo
     else:
         print("Pedido não confirmado. Voltando ao menu de pedidos.")
     
@@ -327,11 +328,12 @@ def finalizar_pedido():
 
 
     
-def avaliar_pedido():
+def avaliar_pedido():# Função para avaliar o pedido aqui o usuario podera avaliar o pedido feito
+    print("========== AVALIAÇÃO DO PEDIDO ==========")
     avaliacao = input("Por favor, avalie seu pedido de 1 a 5 estrelas: ")
     comentario = input("Deixe um comentário sobre seu pedido (opcional): ")
 
-    arquivo = open("avaliacoes.txt", "a")
+    arquivo = open("avaliacoes.txt", "a")# Abre o arquivo em modo de adição
     arquivo.write(f"Avaliacoes: {avaliacao} estrelas\nComentario: {comentario}\n\n")
     arquivo.close()
 
